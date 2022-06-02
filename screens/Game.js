@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { Alert, View, StyleSheet, Text, FlatList } from "react-native";
+import {
+  Alert,
+  View,
+  StyleSheet,
+  FlatList,
+  useWindowDimensions,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { NumberContainer } from "../components/game/NumberContainer";
@@ -10,6 +16,7 @@ import { PrimaryButton } from "../components/ui/PrimaryButton";
 import { Title } from "../components/ui/Title";
 import colors from "../constants/colors";
 import { GuessLogItem } from "../components/game/GuessLogItem";
+import { Container } from "../components/ui/Container";
 
 const generateRandomNumber = (min, max, exclude) => {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -26,6 +33,8 @@ let maxBoundary = 100;
 
 const Game = (props) => {
   const { userNumber, onGameOver } = props;
+
+  const { width, height } = useWindowDimensions();
 
   const initialGuess = generateRandomNumber(1, 100, userNumber);
 
@@ -73,10 +82,8 @@ const Game = (props) => {
   const guessRoundsListLength = guessRounds.length;
 
   return (
-    <View style={styles.root}>
-      <View style={styles.titleContainer}>
-        <Title>Opponent's Guess</Title>
-      </View>
+    <Container>
+      <Title>Opponent's Guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <InstructionText>Higher or lower ?</InstructionText>
@@ -105,7 +112,7 @@ const Game = (props) => {
           keyExtractor={(item) => item}
         />
       </View>
-    </View>
+    </Container>
   );
 };
 
@@ -115,10 +122,10 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     padding: 24,
+    alignItems: "center",
   },
   titleContainer: {
     marginTop: 100,
-    alignItems: "center",
   },
   buttonsContainer: {
     flexDirection: "row",

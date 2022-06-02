@@ -1,4 +1,4 @@
-import { StyleSheet, Image, View, Text } from "react-native";
+import { StyleSheet, Image, View, Text, Dimensions } from "react-native";
 import React from "react";
 import { Title } from "../components/ui/Title";
 import colors from "../constants/colors";
@@ -28,6 +28,8 @@ const GameOver = (props) => {
 
 export default GameOver;
 
+const deviceWidth = Dimensions.get("window").width;
+
 const styles = StyleSheet.create({
   root: {
     flex: 1,
@@ -36,9 +38,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageContainer: {
-    width: 300,
-    height: 300,
-    borderRadius: 150,
+    width: deviceWidth < 380 ? 150 : 300,
+    height: deviceWidth < 380 ? 150 : 300,
+    borderRadius: deviceWidth < 380 ? 75 : 150,
     marginHorizontal: 36,
     borderWidth: 3,
     borderColor: colors.PRIMARY_800,
