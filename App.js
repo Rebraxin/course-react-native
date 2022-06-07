@@ -1,5 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Button } from "react-native";
 import { Container } from "./components/ui/Container";
@@ -7,8 +8,48 @@ import { colors } from "./constants/colors";
 import Categories from "./pages/Categories";
 import MealDetails from "./pages/MealDetails";
 import MealsOverview from "./pages/MealsOverview";
+import Favorites from "./pages/Favorites";
+import { Ionicons } from "@expo/vector-icons";
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+const Drawernavigator = () => {
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: colors.DARK_BROWN },
+        headerTintColor: colors.WHITE,
+        sceneContainerStyle: { backgroundColor: colors.SCENE_BACKGROUND },
+        drawerContentStyle: { backgroundColor: colors.DARK_BROWN },
+        drawerInactiveTintColor: colors.WHITE,
+        drawerActiveTintColor: colors.DARK_BROWN,
+        drawerActiveBackgroundColor: colors.LIGHT_BROWN,
+      }}
+    >
+      <Drawer.Screen
+        name='Categories'
+        component={Categories}
+        options={{
+          title: "All Categories",
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name='list' color={color} size={size} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name='Favorites'
+        component={Favorites}
+        options={{
+          title: "My Favorites Meals",
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name='star' color={color} size={size} />
+          ),
+        }}
+      />
+    </Drawer.Navigator>
+  );
+};
 
 export default function App() {
   return (
@@ -26,9 +67,9 @@ export default function App() {
         >
           {/* By default, the initial route will be the first child of Stack */}
           <Stack.Screen
-            name='MealsCategories'
-            component={Categories}
-            options={{ title: "All Categories" }}
+            name='Drawer'
+            component={Drawernavigator}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name='MealsOverview'

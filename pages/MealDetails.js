@@ -26,7 +26,7 @@ const MealDetails = (props) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: "Details",
+      title: selectedMeal.title,
       headerRight: () => (
         <IconButton
           icon='star'
