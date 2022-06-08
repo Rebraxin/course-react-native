@@ -7,9 +7,9 @@ import {
   View,
 } from "react-native";
 import React from "react";
-import { colors } from "../constants/colors";
+import { colors } from "../../constants/colors";
 import { useNavigation } from "@react-navigation/native";
-import { MealInfos } from "./MealInfos";
+import { MealInfos } from "../MealInfos";
 
 export const MealItem = (props) => {
   const { id, title, imageUrl, duration, complexity, affordability } = props;
